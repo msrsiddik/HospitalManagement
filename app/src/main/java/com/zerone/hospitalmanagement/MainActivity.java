@@ -4,7 +4,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FragmentController{
 
     FragmentManager manager;
 
@@ -15,5 +15,11 @@ public class MainActivity extends AppCompatActivity {
 
         manager = getSupportFragmentManager();
         manager.beginTransaction().add(R.id.fragmentContainer,new HomeFragment()).commit();
+    }
+
+    @Override
+    public void gotoLoginPage() {
+        manager = getSupportFragmentManager();
+        manager.beginTransaction().addToBackStack(null).replace(R.id.fragmentContainer,new LoginFragment()).commit();
     }
 }

@@ -17,6 +17,7 @@ import android.widget.Toast;
  */
 public class HomeFragment extends Fragment {
     private CardView doctorListBtn, appointmentBtn, adminBtn, doctorBtn;
+    private FragmentController controller;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -62,14 +63,16 @@ public class HomeFragment extends Fragment {
     View.OnClickListener adminListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Toast.makeText(getActivity(), "Admin", Toast.LENGTH_SHORT).show();
+            controller = (FragmentController) getActivity();
+            controller.gotoLoginPage();
         }
     };
 
     View.OnClickListener doctorListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Toast.makeText(getActivity(), "Doctor", Toast.LENGTH_SHORT).show();
+            controller = (FragmentController) getActivity();
+            controller.gotoLoginPage();
         }
     };
 }
