@@ -34,6 +34,24 @@ public class HospitalDBHelper extends SQLiteOpenHelper {
             TABLE_DOCTOR_COL_EMAIL+" text, "+
             TABLE_DOCTOR_COL_PASS+" text)";
 
+    //Patient Table And Column Name
+    public static final String TABLE_PATIENT = "patient_tbl";
+    public static final String TABLE_PATIENT_COL_ID = "patient_id";
+    public static final String TABLE_PATIENT_COL_NAME = "patient_name";
+    public static final String TABLE_PATIENT_COL_GENDER = "patient_gender";
+    public static final String TABLE_PATIENT_COL_AGE = "patient_age";
+    public static final String TABLE_PATIENT_COL_ADDRESS = "patient_address";
+    public static final String TABLE_PATIENT_COL_DOCTOR = "patients_doctor";
+
+    //Patient Table Create Query
+    public static final String CREATE_TABLE_PATIENT = "create table "+TABLE_PATIENT+"(" +
+            TABLE_PATIENT_COL_ID+" integer primary key, "+
+            TABLE_PATIENT_COL_NAME+" text, "+
+            TABLE_PATIENT_COL_GENDER+" text, "+
+            TABLE_PATIENT_COL_AGE+" text, "+
+            TABLE_PATIENT_COL_ADDRESS+" text, "+
+            TABLE_PATIENT_COL_DOCTOR+" text )";
+
     public HospitalDBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -41,6 +59,7 @@ public class HospitalDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_DOCTOR);
+        db.execSQL(CREATE_TABLE_PATIENT);
 
     }
 

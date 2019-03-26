@@ -5,4 +5,5 @@ public interface FragmentController {
     void gotoAdminPanel();
     void gotoAddDoctorForm();
     void gotoDoctorList();
+    void gotoAppointment();
 }

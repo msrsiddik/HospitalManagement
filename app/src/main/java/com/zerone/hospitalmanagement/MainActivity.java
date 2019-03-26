@@ -55,4 +55,10 @@ public class MainActivity extends AppCompatActivity implements FragmentControlle
         manager = getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(R.id.fragmentContainer,new DoctorListFragment()).commit();
     }
+
+    @Override
+    public void gotoAppointment() {
+        manager = getSupportFragmentManager();
+        manager.beginTransaction().addToBackStack(null).replace(R.id.fragmentContainer,new AppoinmentFragment()).commit();
+    }
 }

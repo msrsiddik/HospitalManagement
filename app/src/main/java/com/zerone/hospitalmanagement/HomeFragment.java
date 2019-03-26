@@ -57,7 +57,8 @@ public class HomeFragment extends Fragment {
     View.OnClickListener appointmentListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Toast.makeText(getActivity(), "Appointment", Toast.LENGTH_SHORT).show();
+            controller = (FragmentController) getActivity();
+            controller.gotoAppointment();
         }
     };
 
