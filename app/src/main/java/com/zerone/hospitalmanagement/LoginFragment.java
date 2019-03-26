@@ -12,6 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.zerone.hospitalmanagement.Database.DoctorDataSource;
+import com.zerone.hospitalmanagement.Model.DoctorUserModel;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +26,8 @@ public class LoginFragment extends Fragment {
     private TextInputLayout user, pass;
     private Button loginBtn;
     private FragmentController controller;
+
+    private DoctorDataSource doctorDataSource;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -41,6 +49,8 @@ public class LoginFragment extends Fragment {
         pass = view.findViewById(R.id.pass);
         loginBtn = view.findViewById(R.id.loginBtn);
 
+        doctorDataSource = new DoctorDataSource(getContext());
+
         loginBtn.setOnClickListener(loginListener);
 
     }
@@ -50,11 +60,23 @@ public class LoginFragment extends Fragment {
         public void onClick(View v) {
             String username = user.getEditText().getText().toString();
             String password = pass.getEditText().getText().toString();
-            if (username.equals("admin") && password.equals("admin")){
-                controller = (FragmentController) getActivity();
-                controller.gotoAdminPanel();
-            } else {
-                Toast.makeText(getActivity(), username + " " + password, Toast.LENGTH_SHORT).show();
+
+            for (int i = 0; i < doctorDataSource.doctorUserModels().size(); i++) {
+
+                String email = doctorDataSource.doctorUserModels().get(i).getEmail();
+                String pass = doctorDataSource.doctorUserModels().get(i).getPassword();
+
+                if (username.equals("admin") && password.equals("admin")){
+                    controller = (FragmentController) getActivity();
+                    controller.gotoAdminPanel();
+                }
+                else if (username.equals(email) && password.equals(pass)){
+                    Toast.makeText(getActivity(), "Doctor Login", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                else {
+                    Toast.makeText(getActivity(), "wrong user", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     };

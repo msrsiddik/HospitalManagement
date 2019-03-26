@@ -20,7 +20,8 @@ import com.zerone.hospitalmanagement.Model.DoctorModel;
  * A simple {@link Fragment} subclass.
  */
 public class AddDoctorFormFragment extends Fragment {
-    private TextInputLayout doc_NameInput, doc_eduDegreeInput, doc_professionInput, doc_categoryInput, doc_addressInput, doc_mobileInput, doc_emailInput;
+    private TextInputLayout doc_NameInput, doc_eduDegreeInput, doc_professionInput, doc_categoryInput,
+            doc_addressInput, doc_mobileInput, doc_emailInput, doc_passwordInput;
     private Button doc_confirmBtn;
 
     public AddDoctorFormFragment() {
@@ -46,6 +47,7 @@ public class AddDoctorFormFragment extends Fragment {
         doc_addressInput = view.findViewById(R.id.doc_addressInput);
         doc_mobileInput = view.findViewById(R.id.doc_mobileInput);
         doc_emailInput = view.findViewById(R.id.doc_emailInput);
+        doc_passwordInput = view.findViewById(R.id.doc_passwordInput);
         doc_confirmBtn = view.findViewById(R.id.doc_confirmBtn);
 
         doc_confirmBtn.setOnClickListener(confirmBtnListener);
@@ -63,8 +65,9 @@ public class AddDoctorFormFragment extends Fragment {
             String address = doc_addressInput.getEditText().getText().toString();
             String mobile = doc_mobileInput.getEditText().getText().toString();
             String email = doc_emailInput.getEditText().getText().toString();
+            String pass = doc_passwordInput.getEditText().getText().toString();
 
-            final DoctorModel doctorModel = new DoctorModel(name,edu,pro,cate,address,mobile,email);
+            final DoctorModel doctorModel = new DoctorModel(name,edu,pro,cate,address,mobile,email,pass);
 
             DoctorDataSource dataSource = new DoctorDataSource(getContext());
             long inserRow = dataSource.insertNewDoctor(doctorModel);

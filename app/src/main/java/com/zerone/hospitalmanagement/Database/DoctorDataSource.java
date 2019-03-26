@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.zerone.hospitalmanagement.Model.DoctorModel;
+import com.zerone.hospitalmanagement.Model.DoctorUserModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,7 @@ public class DoctorDataSource {
         values.put(HospitalDBHelper.TABLE_DOCTOR_COL_ADDRESS, doctorModel.getDoctorAddress());
         values.put(HospitalDBHelper.TABLE_DOCTOR_COL_MOBILE, doctorModel.getDoctorMobile());
         values.put(HospitalDBHelper.TABLE_DOCTOR_COL_EMAIL, doctorModel.getDoctorEmail());
+        values.put(HospitalDBHelper.TABLE_DOCTOR_COL_PASS, doctorModel.getDoctorPassword());
 
         long insertRow = db.insert(HospitalDBHelper.TABLE_DOCTOR,null,values);
         this.closeDB();
@@ -43,12 +45,34 @@ public class DoctorDataSource {
         return insertRow;
     }
 
+    public List<DoctorUserModel> doctorUserModels(){
+        List<DoctorUserModel> doctorUserModels = new ArrayList<>();
+        this.openDB();
+
+        Cursor cursor = db.rawQuery("select "+HospitalDBHelper.TABLE_DOCTOR_COL_ID+", "+HospitalDBHelper.TABLE_DOCTOR_COL_EMAIL+", "+HospitalDBHelper.TABLE_DOCTOR_COL_PASS+" from " + HospitalDBHelper.TABLE_DOCTOR,null);
+        if (cursor != null && cursor.getCount() > 0){
+            cursor.moveToFirst();
+            do {
+                int id = cursor.getInt(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_ID));
+                String email = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_EMAIL));
+                String pass = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_PASS));
+
+                doctorUserModels.add(new DoctorUserModel(id,email,pass));
+            }while (cursor.moveToNext());
+
+        }
+
+        cursor.close();
+        this.closeDB();
+        return doctorUserModels;
+    }
+
     public List<DoctorModel> getAlldoctorInfoCollectList(){
         List<DoctorModel> infoCollects = new ArrayList<>();
         this.openDB();
 
         Cursor cursor = db.rawQuery("select * from "+ HospitalDBHelper.TABLE_DOCTOR,null);
-        if (cursor != null && cursor.getCount() >0){
+        if (cursor != null && cursor.getCount() > 0){
             cursor.moveToFirst();
             do {
                 int id = cursor.getInt(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_ID));
@@ -59,8 +83,9 @@ public class DoctorDataSource {
                 String add = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_ADDRESS));
                 String mobile = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_MOBILE));
                 String email = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_EMAIL));
+                String pass = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_PASS));
 
-                infoCollects.add(new DoctorModel(id,name,edu,pro,cate,add,mobile,email));
+                infoCollects.add(new DoctorModel(id,name,edu,pro,cate,add,mobile,email,pass));
             }while (cursor.moveToNext());
         }
 

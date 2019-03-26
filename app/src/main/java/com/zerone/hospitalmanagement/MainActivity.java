@@ -25,8 +25,9 @@ public class MainActivity extends AppCompatActivity implements FragmentControlle
         String[] prof = getResources().getStringArray(R.array.doctor_prof);
         String[] cate = getResources().getStringArray(R.array.doctor_category);
         String[] addr = getResources().getStringArray(R.array.doctor_address);
+        String[] pass = getResources().getStringArray(R.array.doctor_password);
         for (int i = 0; i < name.length ; i++) {
-            doctorDataSource.insertNewDoctor(new DoctorModel(name[i],edu[i],prof[i],cate[i],addr[i],null,null));
+            doctorDataSource.insertNewDoctor(new DoctorModel(name[i],edu[i],prof[i],cate[i],addr[i],null,null,pass[i]));
         }
 
     }

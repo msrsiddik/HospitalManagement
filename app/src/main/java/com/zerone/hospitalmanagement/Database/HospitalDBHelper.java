@@ -20,6 +20,7 @@ public class HospitalDBHelper extends SQLiteOpenHelper {
     public static final String TABLE_DOCTOR_COL_ADDRESS = "doctor_address";
     public static final String TABLE_DOCTOR_COL_MOBILE = "doctor_mobile";
     public static final String TABLE_DOCTOR_COL_EMAIL = "doctor_email";
+    public static final String TABLE_DOCTOR_COL_PASS = "doctor_password";
 
     //Doctor Table Create Query
     public static final String CREATE_TABLE_DOCTOR = "create table "+TABLE_DOCTOR+"("+
@@ -30,7 +31,8 @@ public class HospitalDBHelper extends SQLiteOpenHelper {
             TABLE_DOCTOR_COL_CATEGORY+" text, "+
             TABLE_DOCTOR_COL_ADDRESS+" text, "+
             TABLE_DOCTOR_COL_MOBILE+" text, "+
-            TABLE_DOCTOR_COL_EMAIL+" text)";
+            TABLE_DOCTOR_COL_EMAIL+" text, "+
+            TABLE_DOCTOR_COL_PASS+" text)";
 
     public HospitalDBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);

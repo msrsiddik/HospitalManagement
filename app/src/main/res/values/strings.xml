@@ -51,4 +51,13 @@
         <item>Shyamoli</item>
     </string-array>
 
+    <string-array name="doctor_password">
+        <item>111111</item>
+        <item>222222</item>
+        <item>333333</item>
+        <item>444444</item>
+        <item>555555</item>
+        <item>666666</item>
+    </string-array>
+
 </resources>

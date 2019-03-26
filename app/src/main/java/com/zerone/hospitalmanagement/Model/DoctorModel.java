@@ -2,9 +2,10 @@ package com.zerone.hospitalmanagement.Model;
 
 public class DoctorModel {
     private int id;
-    private String doctorName, doctorEducation, doctorProfession, doctorCategory, doctorAddress, doctorMobile, doctorEmail;
+    private String doctorName, doctorEducation, doctorProfession, doctorCategory,
+            doctorAddress, doctorMobile, doctorEmail, doctorPassword;
 
-    public DoctorModel(int id, String doctorName, String doctorEducation, String doctorProfession, String doctorCategory, String doctorAddress, String doctorMobile, String doctorEmail) {
+    public DoctorModel(int id, String doctorName, String doctorEducation, String doctorProfession, String doctorCategory, String doctorAddress, String doctorMobile, String doctorEmail, String doctorPassword) {
         this.id = id;
         this.doctorName = doctorName;
         this.doctorEducation = doctorEducation;
@@ -13,9 +14,10 @@ public class DoctorModel {
         this.doctorAddress = doctorAddress;
         this.doctorMobile = doctorMobile;
         this.doctorEmail = doctorEmail;
+        this.doctorPassword = doctorPassword;
     }
 
-    public DoctorModel(String doctorName, String doctorEducation, String doctorProfession, String doctorCategory, String doctorAddress, String doctorMobile, String doctorEmail) {
+    public DoctorModel(String doctorName, String doctorEducation, String doctorProfession, String doctorCategory, String doctorAddress, String doctorMobile, String doctorEmail, String doctorPassword) {
         this.doctorName = doctorName;
         this.doctorEducation = doctorEducation;
         this.doctorProfession = doctorProfession;
@@ -23,6 +25,7 @@ public class DoctorModel {
         this.doctorAddress = doctorAddress;
         this.doctorMobile = doctorMobile;
         this.doctorEmail = doctorEmail;
+        this.doctorPassword = doctorPassword;
     }
 
     public int getId() {
@@ -55,5 +58,9 @@ public class DoctorModel {
 
     public String getDoctorEmail() {
         return doctorEmail;
+    }
+
+    public String getDoctorPassword() {
+        return doctorPassword;
     }
 }
