@@ -13,10 +13,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.zerone.hospitalmanagement.Database.DoctorDataSource;
-import com.zerone.hospitalmanagement.Model.DoctorUserModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -26,6 +22,7 @@ public class LoginFragment extends Fragment {
     private TextInputLayout user, pass;
     private Button loginBtn;
     private FragmentController controller;
+    private UserPreference userPreference;
 
     private DoctorDataSource doctorDataSource;
 
@@ -49,6 +46,8 @@ public class LoginFragment extends Fragment {
         pass = view.findViewById(R.id.pass);
         loginBtn = view.findViewById(R.id.loginBtn);
 
+        userPreference = new UserPreference(getContext());
+
         doctorDataSource = new DoctorDataSource(getContext());
 
         loginBtn.setOnClickListener(loginListener);
@@ -67,15 +66,16 @@ public class LoginFragment extends Fragment {
                 String pass = doctorDataSource.doctorUserModels().get(i).getPassword();
 
                 if (username.equals("admin") && password.equals("admin")){
+                    userPreference.setLoginStatus(true);
                     controller = (FragmentController) getActivity();
                     controller.gotoAdminPanel();
                 }
                 else if (username.equals(email) && password.equals(pass)){
+                    userPreference.setLoginStatus(true);
                     controller = (FragmentController) getActivity();
                     controller.gotoPatientList(doctorDataSource.getAlldoctorInfoCollectList().get(i).getDoctorName());
-                    break;
                 }
-                else {
+                else if (!username.equals(email) && !password.equals(pass)){
                     Toast.makeText(getActivity(), "wrong user", Toast.LENGTH_SHORT).show();
                 }
             }

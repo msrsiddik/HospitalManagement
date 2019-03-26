@@ -6,6 +6,9 @@
     android:orientation="vertical"
     tools:context=".PatientListFragment">
 
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
     <Spinner
         android:id="@+id/doctorNameByList"
         android:layout_width="match_parent"

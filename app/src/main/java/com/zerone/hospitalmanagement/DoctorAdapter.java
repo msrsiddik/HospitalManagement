@@ -1,22 +1,34 @@
 package com.zerone.hospitalmanagement;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.zerone.hospitalmanagement.Database.DoctorDataSource;
 import com.zerone.hospitalmanagement.Model.DoctorModel;
 
 import java.util.List;
 
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorViewHolder> {
     private List<DoctorModel> doctorModelList;
+    private Context context;
+    private DoctorDataSource doctorDataSource;
+    private UserPreference userPreference;
 
-    public DoctorAdapter(List<DoctorModel> doctorModelList) {
+    public DoctorAdapter(List<DoctorModel> doctorModelList, Context context) {
         this.doctorModelList = doctorModelList;
+        this.context = context;
+        doctorDataSource = new DoctorDataSource(context);
+        userPreference = new UserPreference(context);
     }
 
     @NonNull
@@ -35,6 +47,31 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         doctorViewHolder.doctorProTV.setText(doctorModel.getDoctorProfession());
         doctorViewHolder.doctorCateTV.setText(doctorModel.getDoctorCategory());
         doctorViewHolder.doctorAddTV.setText(doctorModel.getDoctorAddress());
+        if (userPreference.getLoginStatus()) {
+            doctorViewHolder.moreOptionBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
+                    MenuInflater inflater = popupMenu.getMenuInflater();
+                    inflater.inflate(R.menu.doctor_option_menu, popupMenu.getMenu());
+                    popupMenu.show();
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem menuItem) {
+                            if (menuItem.getItemId() == R.id.edit_item) {
+
+                            } else if (menuItem.getItemId() == R.id.delete_item) {
+                                int doctorId = doctorModel.getId();
+                                doctorDataSource.deleteDoctorById(doctorId);
+                            }
+                            return false;
+                        }
+                    });
+                }
+            });
+        } else {
+            doctorViewHolder.moreOptionBtn.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -45,6 +82,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
     class DoctorViewHolder extends RecyclerView.ViewHolder {
         TextView doctorNameTV, doctorEduTV, doctorProTV, doctorCateTV, doctorAddTV;
         Button doctorCallBtn, doctorEmailBtn;
+        TextView moreOptionBtn;
 
         public DoctorViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -56,6 +94,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
             doctorAddTV = itemView.findViewById(R.id.doctorAddTV);
             doctorCallBtn = itemView.findViewById(R.id.doctorCallBtn);
             doctorEmailBtn = itemView.findViewById(R.id.doctorEmailBtn);
+            moreOptionBtn = itemView.findViewById(R.id.moreOptionBtn);
         }
     }
 }

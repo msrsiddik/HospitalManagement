@@ -93,4 +93,11 @@ public class DoctorDataSource {
         this.closeDB();
         return infoCollects;
     }
+
+    public int deleteDoctorById(int doctorId){
+        this.openDB();
+        final int deleteRow = db.delete(HospitalDBHelper.TABLE_DOCTOR,HospitalDBHelper.TABLE_DOCTOR_COL_ID+" = "+doctorId,null);
+        this.closeDB();
+        return deleteRow;
+    }
 }

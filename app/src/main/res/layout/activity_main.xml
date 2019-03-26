@@ -6,4 +6,7 @@
     android:id="@+id/fragmentContainer"
     tools:context=".MainActivity">
 
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
 </FrameLayout>

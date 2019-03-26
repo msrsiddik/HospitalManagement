@@ -60,7 +60,6 @@ public class HospitalDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_DOCTOR);
         db.execSQL(CREATE_TABLE_PATIENT);
-
     }
 
     @Override

@@ -52,7 +52,7 @@ public class DoctorListFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        doctorAdapter = new DoctorAdapter(doctorModelList);
+        doctorAdapter = new DoctorAdapter(doctorModelList,getContext());
         recyclerView.setAdapter(doctorAdapter);
 
     }
