@@ -40,6 +40,7 @@ public class AdminPanelFragment extends Fragment {
 
         addDoctorBtn.setOnClickListener(addDoctorListener);
         modifyDoctorBtn.setOnClickListener(modifyDoctorListener);
+        patientListBtn.setOnClickListener(patientListListener);
 
     }
 
@@ -56,6 +57,14 @@ public class AdminPanelFragment extends Fragment {
         public void onClick(View v) {
             controller = (FragmentController) getActivity();
             controller.gotoDoctorList();
+        }
+    };
+
+    View.OnClickListener patientListListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            controller = (FragmentController) getActivity();
+            controller.gotoPatientList("admin");
         }
     };
 }

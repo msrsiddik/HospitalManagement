@@ -71,7 +71,8 @@ public class LoginFragment extends Fragment {
                     controller.gotoAdminPanel();
                 }
                 else if (username.equals(email) && password.equals(pass)){
-                    Toast.makeText(getActivity(), "Doctor Login", Toast.LENGTH_SHORT).show();
+                    controller = (FragmentController) getActivity();
+                    controller.gotoPatientList(doctorDataSource.getAlldoctorInfoCollectList().get(i).getDoctorName());
                     break;
                 }
                 else {

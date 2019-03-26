@@ -6,4 +6,5 @@ public interface FragmentController {
     void gotoAddDoctorForm();
     void gotoDoctorList();
     void gotoAppointment();
+    void gotoPatientList(String name);
 }

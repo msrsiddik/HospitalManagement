@@ -25,9 +25,10 @@ public class MainActivity extends AppCompatActivity implements FragmentControlle
         String[] prof = getResources().getStringArray(R.array.doctor_prof);
         String[] cate = getResources().getStringArray(R.array.doctor_category);
         String[] addr = getResources().getStringArray(R.array.doctor_address);
+        String[] email = getResources().getStringArray(R.array.doctor_email);
         String[] pass = getResources().getStringArray(R.array.doctor_password);
         for (int i = 0; i < name.length ; i++) {
-            doctorDataSource.insertNewDoctor(new DoctorModel(name[i],edu[i],prof[i],cate[i],addr[i],null,null,pass[i]));
+            doctorDataSource.insertNewDoctor(new DoctorModel(name[i],edu[i],prof[i],cate[i],addr[i],null,email[i],pass[i]));
         }
 
     }
@@ -41,7 +42,9 @@ public class MainActivity extends AppCompatActivity implements FragmentControlle
     @Override
     public void gotoAdminPanel() {
         manager = getSupportFragmentManager();
-        manager.beginTransaction().addToBackStack(null).replace(R.id.fragmentContainer,new AdminPanelFragment()).commit();
+        manager.popBackStack();
+        manager.beginTransaction().replace(R.id.fragmentContainer,new AdminPanelFragment()).commit();
+
     }
 
     @Override
@@ -61,4 +64,15 @@ public class MainActivity extends AppCompatActivity implements FragmentControlle
         manager = getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(R.id.fragmentContainer,new AppoinmentFragment()).commit();
     }
+
+    @Override
+    public void gotoPatientList(String name) {
+        manager = getSupportFragmentManager();
+        PatientListFragment patientListFragment = new PatientListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("loginDoctor",name);
+        patientListFragment.setArguments(bundle);
+        manager.beginTransaction().addToBackStack(null).replace(R.id.fragmentContainer,patientListFragment).commit();
+    }
+
 }

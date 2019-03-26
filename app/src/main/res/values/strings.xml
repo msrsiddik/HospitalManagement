@@ -51,6 +51,15 @@
         <item>Shyamoli</item>
     </string-array>
 
+    <string-array name="doctor_email">
+        <item>doctor1@email.com</item>
+        <item>doctor2@email.com</item>
+        <item>doctor3@email.com</item>
+        <item>doctor4@email.com</item>
+        <item>doctor5@email.com</item>
+        <item>doctor6@email.com</item>
+    </string-array>
+
     <string-array name="doctor_password">
         <item>111111</item>
         <item>222222</item>
