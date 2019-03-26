@@ -22,4 +22,10 @@ public class MainActivity extends AppCompatActivity implements FragmentControlle
         manager = getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(R.id.fragmentContainer,new LoginFragment()).commit();
     }
+
+    @Override
+    public void gotoAdminPanel() {
+        manager = getSupportFragmentManager();
+        manager.beginTransaction().addToBackStack(null).replace(R.id.fragmentContainer,new AdminPanelFragment()).commit();
+    }
 }

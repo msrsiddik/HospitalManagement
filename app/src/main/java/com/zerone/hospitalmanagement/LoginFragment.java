@@ -19,6 +19,7 @@ import android.widget.Toast;
 public class LoginFragment extends Fragment {
     private TextInputLayout user, pass;
     private Button loginBtn;
+    private FragmentController controller;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -47,7 +48,14 @@ public class LoginFragment extends Fragment {
     View.OnClickListener loginListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Toast.makeText(getActivity(), user.getEditText().getText().toString()+" "+pass.getEditText().getText().toString(), Toast.LENGTH_SHORT).show();
+            String username = user.getEditText().getText().toString();
+            String password = pass.getEditText().getText().toString();
+            if (username.equals("admin") && password.equals("admin")){
+                controller = (FragmentController) getActivity();
+                controller.gotoAdminPanel();
+            } else {
+                Toast.makeText(getActivity(), username + " " + password, Toast.LENGTH_SHORT).show();
+            }
         }
     };
 }
