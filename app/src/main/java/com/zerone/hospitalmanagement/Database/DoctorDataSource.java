@@ -60,7 +60,7 @@ public class DoctorDataSource {
                 String mobile = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_MOBILE));
                 String email = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_EMAIL));
 
-                infoCollects.add(new DoctorModel(id,name,edu,pro,add,mobile,cate,email));
+                infoCollects.add(new DoctorModel(id,name,edu,pro,cate,add,mobile,email));
             }while (cursor.moveToNext());
         }
 

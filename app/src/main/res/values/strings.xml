@@ -4,4 +4,51 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="moreOptionIcon">&#8942;</string>
+
+    <!-- TODO: some Doctor list -->
+    <string-array name="doctor_name">
+        <item>Dr.A.B.M. Khurshed Alam Bhuyian</item>
+        <item>Dr.A A Ashraf Ali</item>
+        <item>Dr.A A M Najmul Huda</item>
+        <item>Dr.A A M Rayhan Uddin</item>
+        <item>Dr. B C Barua</item>
+        <item>Dr. B D Bidhu</item>
+    </string-array>
+
+    <string-array name="doctor_edu">
+        <item>MBBS, PhD(USA) Diabetes</item>
+        <item>MBBS, FCPS(Surgery) FICS WHO-Fellow (Japan)</item>
+        <item>MBBS, FCPS(Medicine), MD(Nephrology)</item>
+        <item>MBBS, MCPS(Medicine), FCCS(USA), FCP</item>
+        <item>MBBS, PGT (Medicine), CCD, CMU</item>
+        <item>MBBS, MD(Medicine), FSCP(USA), Fellow ICU(Thailand)</item>
+    </string-array>
+
+    <string-array name="doctor_prof">
+        <item>Doctor</item>
+        <item>Professor</item>
+        <item>Asst.Professor</item>
+        <item>Professor</item>
+        <item>Doctor</item>
+        <item>Professor</item>
+    </string-array>
+
+    <string-array name="doctor_category">
+        <item>Medicine Specialist</item>
+        <item>General and Laparoscopic Surgon</item>
+        <item>Internal Medicine Specialist</item>
+        <item>Medicine Specialist</item>
+        <item>Medicine and Diabetics Specialist</item>
+        <item>Internal Medicine Specialist</item>
+    </string-array>
+
+    <string-array name="doctor_address">
+        <item>Malibagh</item>
+        <item>Green Road</item>
+        <item>Station Road</item>
+        <item>O.R.Nizam Road</item>
+        <item>Uttara</item>
+        <item>Shyamoli</item>
+    </string-array>
+
 </resources>

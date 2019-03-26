@@ -4,6 +4,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.zerone.hospitalmanagement.Database.DoctorDataSource;
+import com.zerone.hospitalmanagement.Model.DoctorModel;
+
 public class MainActivity extends AppCompatActivity implements FragmentController{
 
     FragmentManager manager;
@@ -15,6 +18,17 @@ public class MainActivity extends AppCompatActivity implements FragmentControlle
 
         manager = getSupportFragmentManager();
         manager.beginTransaction().add(R.id.fragmentContainer,new HomeFragment()).commit();
+
+        DoctorDataSource doctorDataSource = new DoctorDataSource(this);
+        String[] name = getResources().getStringArray(R.array.doctor_name);
+        String[] edu = getResources().getStringArray(R.array.doctor_edu);
+        String[] prof = getResources().getStringArray(R.array.doctor_prof);
+        String[] cate = getResources().getStringArray(R.array.doctor_category);
+        String[] addr = getResources().getStringArray(R.array.doctor_address);
+        for (int i = 0; i < name.length ; i++) {
+            doctorDataSource.insertNewDoctor(new DoctorModel(name[i],edu[i],prof[i],cate[i],addr[i],null,null));
+        }
+
     }
 
     @Override
