@@ -16,6 +16,7 @@ import android.view.ViewGroup;
  */
 public class AdminPanelFragment extends Fragment {
     private CardView addDoctorBtn, modifyDoctorBtn, patientListBtn;
+    private FragmentController controller;
 
     public AdminPanelFragment() {
         // Required empty public constructor
@@ -37,6 +38,24 @@ public class AdminPanelFragment extends Fragment {
         modifyDoctorBtn = view.findViewById(R.id.modifyDoctorBtn);
         patientListBtn = view.findViewById(R.id.patientListBtn);
 
+        addDoctorBtn.setOnClickListener(addDoctorListener);
+        modifyDoctorBtn.setOnClickListener(modifyDoctorListener);
 
     }
+
+    View.OnClickListener addDoctorListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            controller = (FragmentController) getActivity();
+            controller.gotoAddDoctorForm();
+        }
+    };
+
+    View.OnClickListener modifyDoctorListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            controller = (FragmentController) getActivity();
+            controller.gotoDoctorList();
+        }
+    };
 }

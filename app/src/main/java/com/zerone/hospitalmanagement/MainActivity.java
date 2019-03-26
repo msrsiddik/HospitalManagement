@@ -28,4 +28,16 @@ public class MainActivity extends AppCompatActivity implements FragmentControlle
         manager = getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(R.id.fragmentContainer,new AdminPanelFragment()).commit();
     }
+
+    @Override
+    public void gotoAddDoctorForm() {
+        manager = getSupportFragmentManager();
+        manager.beginTransaction().addToBackStack(null).replace(R.id.fragmentContainer,new AddDoctorFormFragment()).commit();
+    }
+
+    @Override
+    public void gotoDoctorList() {
+        manager = getSupportFragmentManager();
+        manager.beginTransaction().addToBackStack(null).replace(R.id.fragmentContainer,new DoctorListFragment()).commit();
+    }
 }

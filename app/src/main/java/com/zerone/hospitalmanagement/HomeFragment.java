@@ -49,7 +49,8 @@ public class HomeFragment extends Fragment {
     View.OnClickListener doctorListListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Toast.makeText(getActivity(), "Doctor List", Toast.LENGTH_SHORT).show();
+            controller = (FragmentController) getActivity();
+            controller.gotoDoctorList();
         }
     };
 
