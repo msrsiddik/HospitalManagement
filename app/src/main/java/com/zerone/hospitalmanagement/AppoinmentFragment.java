@@ -39,6 +39,8 @@ public class AppoinmentFragment extends Fragment implements AdapterView.OnItemSe
     private String doctor = "";
     private PatientDataSource patientDataSource;
 
+    private FragmentController fragmentController;
+
     public AppoinmentFragment() {
         // Required empty public constructor
     }
@@ -66,6 +68,8 @@ public class AppoinmentFragment extends Fragment implements AdapterView.OnItemSe
 
         patient_confirmBtn.setOnClickListener(confirmBtnListener);
 
+        fragmentController = (FragmentController) getActivity();
+
     }
 
     View.OnClickListener confirmBtnListener = new View.OnClickListener() {
@@ -81,6 +85,8 @@ public class AppoinmentFragment extends Fragment implements AdapterView.OnItemSe
             patientDataSource.insertNewPatient(patientModel);
 
             Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+
+            fragmentController.gotoHomeFragment();
         }
     };
 

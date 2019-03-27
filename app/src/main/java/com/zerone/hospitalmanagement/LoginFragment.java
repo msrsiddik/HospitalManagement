@@ -60,25 +60,28 @@ public class LoginFragment extends Fragment {
             String username = user.getEditText().getText().toString();
             String password = pass.getEditText().getText().toString();
 
-            for (int i = 0; i < doctorDataSource.doctorUserModels().size(); i++) {
+            if (username.equals("admin") && password.equals("admin")){
+                userPreference.setLoginStatus(true);
+                controller = (FragmentController) getActivity();
+                controller.gotoAdminPanel();
+            }
+            else if (!username.equals("admin") && !password.equals("admin")){
+                for (int i = 0; i < doctorDataSource.doctorUserModels().size(); i++) {
+                    String email = doctorDataSource.doctorUserModels().get(i).getEmail();
+                    String pass = doctorDataSource.doctorUserModels().get(i).getPassword();
 
-                String email = doctorDataSource.doctorUserModels().get(i).getEmail();
-                String pass = doctorDataSource.doctorUserModels().get(i).getPassword();
+                    if (username.equals(email) && password.equals(pass)){
+                        controller = (FragmentController) getActivity();
+                        controller.gotoPatientList(doctorDataSource.getAlldoctorInfoCollectList().get(i).getDoctorName());
+                        break;
+                    }
 
-                if (username.equals("admin") && password.equals("admin")){
-                    userPreference.setLoginStatus(true);
-                    controller = (FragmentController) getActivity();
-                    controller.gotoAdminPanel();
-                }
-                else if (username.equals(email) && password.equals(pass)){
-                    userPreference.setLoginStatus(true);
-                    controller = (FragmentController) getActivity();
-                    controller.gotoPatientList(doctorDataSource.getAlldoctorInfoCollectList().get(i).getDoctorName());
-                }
-                else if (!username.equals(email) && !password.equals(pass)){
-                    Toast.makeText(getActivity(), "wrong user", Toast.LENGTH_SHORT).show();
+                    else {
+                        Toast.makeText(getActivity(), "wrong user", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
+
         }
     };
 }

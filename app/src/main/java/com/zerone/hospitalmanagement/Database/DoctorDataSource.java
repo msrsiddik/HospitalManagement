@@ -94,6 +94,46 @@ public class DoctorDataSource {
         return infoCollects;
     }
 
+    public DoctorModel getDoctorInfoById(int id){
+        DoctorModel doctorModel = null;
+        this.openDB();
+        Cursor cursor = db.rawQuery("select * from "+ HospitalDBHelper.TABLE_DOCTOR +" where "+HospitalDBHelper.TABLE_DOCTOR_COL_ID+" = "+id,null);
+        if (cursor != null && cursor.getCount() > 0){
+            cursor.moveToFirst();
+            String name = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_NAME));
+            String edu = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_EDU));
+            String pro = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_PRO));
+            String cate = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_CATEGORY));
+            String add = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_ADDRESS));
+            String mobile = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_MOBILE));
+            String email = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_EMAIL));
+            String pass = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_PASS));
+
+            doctorModel = new DoctorModel(id,name,edu,pro,cate,add,mobile,email,pass);
+        }
+        cursor.close();
+        this.closeDB();
+        return doctorModel;
+    }
+
+    public int updateDoctorInfo(DoctorModel doctorModel){
+        this.openDB();
+        ContentValues values = new ContentValues();
+        values.put(HospitalDBHelper.TABLE_DOCTOR_COL_NAME, doctorModel.getDoctorName());
+        values.put(HospitalDBHelper.TABLE_DOCTOR_COL_EDU, doctorModel.getDoctorEducation());
+        values.put(HospitalDBHelper.TABLE_DOCTOR_COL_PRO, doctorModel.getDoctorProfession());
+        values.put(HospitalDBHelper.TABLE_DOCTOR_COL_CATEGORY, doctorModel.getDoctorCategory());
+        values.put(HospitalDBHelper.TABLE_DOCTOR_COL_ADDRESS, doctorModel.getDoctorAddress());
+        values.put(HospitalDBHelper.TABLE_DOCTOR_COL_MOBILE, doctorModel.getDoctorMobile());
+        values.put(HospitalDBHelper.TABLE_DOCTOR_COL_EMAIL, doctorModel.getDoctorEmail());
+        values.put(HospitalDBHelper.TABLE_DOCTOR_COL_PASS, doctorModel.getDoctorPassword());
+
+        final int updateRow = db.update(HospitalDBHelper.TABLE_DOCTOR,values,HospitalDBHelper.TABLE_DOCTOR_COL_ID+" = "+doctorModel.getId(),null);
+        this.closeDB();
+
+        return updateRow;
+    }
+
     public int deleteDoctorById(int doctorId){
         this.openDB();
         final int deleteRow = db.delete(HospitalDBHelper.TABLE_DOCTOR,HospitalDBHelper.TABLE_DOCTOR_COL_ID+" = "+doctorId,null);

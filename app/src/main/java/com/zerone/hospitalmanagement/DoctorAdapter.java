@@ -23,12 +23,14 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
     private Context context;
     private DoctorDataSource doctorDataSource;
     private UserPreference userPreference;
+    private FragmentController controller;
 
     public DoctorAdapter(List<DoctorModel> doctorModelList, Context context) {
         this.doctorModelList = doctorModelList;
         this.context = context;
         doctorDataSource = new DoctorDataSource(context);
         userPreference = new UserPreference(context);
+        controller = (FragmentController) context;
     }
 
     @NonNull
@@ -41,7 +43,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
     @Override
     public void onBindViewHolder(@NonNull DoctorViewHolder doctorViewHolder, int i) {
         final DoctorModel doctorModel = doctorModelList.get(i);
-
+        final int id = i;
         doctorViewHolder.doctorNameTV.setText(doctorModel.getDoctorName());
         doctorViewHolder.doctorEduTV.setText(doctorModel.getDoctorEducation());
         doctorViewHolder.doctorProTV.setText(doctorModel.getDoctorProfession());
@@ -59,10 +61,16 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
                         @Override
                         public boolean onMenuItemClick(MenuItem menuItem) {
                             if (menuItem.getItemId() == R.id.edit_item) {
-
-                            } else if (menuItem.getItemId() == R.id.delete_item) {
                                 int doctorId = doctorModel.getId();
-                                doctorDataSource.deleteDoctorById(doctorId);
+                                controller.gotoDoctorEditForm(doctorId);
+                            } else if (menuItem.getItemId() == R.id.delete_item) {
+                                int deleteRowId = doctorDataSource.deleteDoctorById(doctorModel.getId());
+                                if (deleteRowId > 0){
+                                    Toast.makeText(context, "Delete Successful", Toast.LENGTH_SHORT).show();
+                                    doctorModelList.remove(id);
+                                    notifyDataSetChanged();
+
+                                }
                             }
                             return false;
                         }

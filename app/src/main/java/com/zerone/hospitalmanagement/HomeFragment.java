@@ -18,6 +18,7 @@ import android.widget.Toast;
 public class HomeFragment extends Fragment {
     private CardView doctorListBtn, appointmentBtn, adminBtn, doctorBtn;
     private FragmentController controller;
+    private UserPreference userPreference;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -44,6 +45,8 @@ public class HomeFragment extends Fragment {
         appointmentBtn.setOnClickListener(appointmentListener);
         adminBtn.setOnClickListener(adminListener);
         doctorBtn.setOnClickListener(doctorListener);
+
+        userPreference = new UserPreference(getContext());
     }
 
     View.OnClickListener doctorListListener = new View.OnClickListener() {
@@ -66,7 +69,11 @@ public class HomeFragment extends Fragment {
         @Override
         public void onClick(View v) {
             controller = (FragmentController) getActivity();
-            controller.gotoLoginPage();
+            if (userPreference.getLoginStatus()){
+                controller.gotoAdminPanel();
+            }else {
+                controller.gotoLoginPage();
+            }
         }
     };
 
