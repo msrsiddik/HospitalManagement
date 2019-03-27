@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -30,7 +31,9 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class AppoinmentFragment extends Fragment implements AdapterView.OnItemSelectedListener {
-    private TextInputLayout patient_NameInput, patient_GenderInput, patient_AgeInput, patient_AddressInput;
+    private TextInputLayout patient_NameInput, patient_AgeInput, patient_AddressInput;
+    private RadioGroup genderGroup;
+    private String gender = "";
     private Spinner chooseDoctor;
     private Button patient_confirmBtn;
 
@@ -58,11 +61,25 @@ public class AppoinmentFragment extends Fragment implements AdapterView.OnItemSe
         super.onViewCreated(view, savedInstanceState);
 
         patient_NameInput = view.findViewById(R.id.patient_NameInput);
-        patient_GenderInput = view.findViewById(R.id.patient_GenderInput);
+        genderGroup = view.findViewById(R.id.genderGroup);
         patient_AgeInput = view.findViewById(R.id.patient_AgeInput);
         patient_AddressInput = view.findViewById(R.id.patient_AddressInput);
         chooseDoctor = view.findViewById(R.id.chooseDoctor);
         patient_confirmBtn = view.findViewById(R.id.patient_confirmBtn);
+
+        genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.maleGender:
+                        gender = "Male";
+                        break;
+                    case R.id.femaleGender:
+                        gender = "Female";
+                        break;
+                }
+            }
+        });
 
         spinnerItemSet();
 
@@ -76,7 +93,6 @@ public class AppoinmentFragment extends Fragment implements AdapterView.OnItemSe
         @Override
         public void onClick(View v) {
             String name = patient_NameInput.getEditText().getText().toString();
-            String gender = patient_GenderInput.getEditText().getText().toString();
             String age = patient_AgeInput.getEditText().getText().toString();
             String address = patient_AddressInput.getEditText().getText().toString();
 
