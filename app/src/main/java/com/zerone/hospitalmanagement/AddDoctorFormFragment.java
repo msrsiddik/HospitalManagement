@@ -2,11 +2,13 @@ package com.zerone.hospitalmanagement;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import com.zerone.hospitalmanagement.Model.DoctorModel;
  * A simple {@link Fragment} subclass.
  */
 public class AddDoctorFormFragment extends Fragment {
+    private Toolbar toolbar;
     private TextInputLayout doc_NameInput, doc_eduDegreeInput, doc_professionInput, doc_categoryInput,
             doc_addressInput, doc_mobileInput, doc_emailInput, doc_passwordInput;
     private Button doc_confirmBtn, doc_updateBtn;
@@ -62,6 +65,9 @@ public class AddDoctorFormFragment extends Fragment {
         doc_passwordInput = view.findViewById(R.id.doc_passwordInput);
         doc_confirmBtn = view.findViewById(R.id.doc_confirmBtn);
         doc_updateBtn = view.findViewById(R.id.doc_updateBtn);
+        toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setTitle("Add Doctor");
+        toolbar.setTitleTextColor(Color.WHITE);
 
         dataSource = new DoctorDataSource(getContext());
         controller = (FragmentController) getActivity();

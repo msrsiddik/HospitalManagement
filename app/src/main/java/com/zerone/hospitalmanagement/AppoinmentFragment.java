@@ -1,18 +1,18 @@
 package com.zerone.hospitalmanagement;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -20,17 +20,15 @@ import android.widget.Toast;
 
 import com.zerone.hospitalmanagement.Database.DoctorDataSource;
 import com.zerone.hospitalmanagement.Database.PatientDataSource;
-import com.zerone.hospitalmanagement.Model.DoctorModel;
 import com.zerone.hospitalmanagement.Model.PatientModel;
 
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class AppoinmentFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+    private Toolbar toolbar;
     private TextInputLayout patient_NameInput, patient_AgeInput, patient_AddressInput;
     private RadioGroup genderGroup;
     private String gender = "";
@@ -66,6 +64,9 @@ public class AppoinmentFragment extends Fragment implements AdapterView.OnItemSe
         patient_AddressInput = view.findViewById(R.id.patient_AddressInput);
         chooseDoctor = view.findViewById(R.id.chooseDoctor);
         patient_confirmBtn = view.findViewById(R.id.patient_confirmBtn);
+        toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setTitle("Appointment");
+        toolbar.setTitleTextColor(Color.WHITE);
 
         genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

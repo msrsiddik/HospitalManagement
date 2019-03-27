@@ -2,6 +2,7 @@ package com.zerone.hospitalmanagement;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -50,6 +51,8 @@ public class AdminPanelFragment extends Fragment {
         modifyDoctorBtn = view.findViewById(R.id.modifyDoctorBtn);
         patientListBtn = view.findViewById(R.id.patientListBtn);
         toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setTitle("Admin Panel");
+        toolbar.setTitleTextColor(Color.WHITE);
         toolbar.inflateMenu(R.menu.toolbar_menu);
         userPreference = new UserPreference(context);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {

@@ -1,14 +1,13 @@
 package com.zerone.hospitalmanagement;
 
+import android.graphics.Color;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.zerone.hospitalmanagement.Database.DoctorDataSource;
 import com.zerone.hospitalmanagement.Model.DoctorModel;
@@ -28,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements FragmentControlle
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(Color.WHITE);
 
         manager = getSupportFragmentManager();
         manager.beginTransaction().add(R.id.fragmentContainer,new HomeFragment()).commit();
@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements FragmentControlle
 
     @Override
     public void gotoPatientList(String name) {
+        manager.beginTransaction().remove(new HomeFragment());
+        manager.popBackStack("login",FragmentManager.POP_BACK_STACK_INCLUSIVE);
         PatientListFragment patientListFragment = new PatientListFragment();
         Bundle bundle = new Bundle();
         bundle.putString("loginDoctor",name);

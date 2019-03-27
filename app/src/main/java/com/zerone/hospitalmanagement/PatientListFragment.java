@@ -1,13 +1,17 @@
 package com.zerone.hospitalmanagement;
 
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -27,11 +31,15 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class PatientListFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+    private Toolbar toolbar;
     private Spinner doctorNameByList;
     private RecyclerView recyclerView;
     private List<PatientModel> patientModelList = new ArrayList<>();
     private PatientDataSource patientDataSource;
     private PatientAdapter patientAdapter;
+
+    private FragmentController fragmentController;
+    private Context context;
 
     private String[] doctorName;
 
@@ -39,6 +47,11 @@ public class PatientListFragment extends Fragment implements AdapterView.OnItemS
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,8 +64,23 @@ public class PatientListFragment extends Fragment implements AdapterView.OnItemS
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        fragmentController = (FragmentController) getActivity();
+
         doctorNameByList = view.findViewById(R.id.doctorNameByList);
         recyclerView = view.findViewById(R.id.patientListView);
+        toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setTitle("My Patient");
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.inflateMenu(R.menu.toolbar_menu);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if (menuItem.getItemId() == R.id.logout){
+                    fragmentController.gotoHomeFragment();
+                }
+                return true;
+            }
+        });
 
         LinearLayoutManager linearLayout = new LinearLayoutManager(getContext());
         linearLayout.setOrientation(LinearLayout.VERTICAL);
