@@ -1,6 +1,9 @@
 package com.zerone.hospitalmanagement;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +53,24 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         doctorViewHolder.doctorProTV.setText(doctorModel.getDoctorProfession());
         doctorViewHolder.doctorCateTV.setText(doctorModel.getDoctorCategory());
         doctorViewHolder.doctorAddTV.setText(doctorModel.getDoctorAddress());
+        doctorViewHolder.doctorCallBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                controller.dialPhoneNumber(doctorModel.getDoctorMobile());
+            }
+        });
+
+        doctorViewHolder.doctorEmailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"+doctorModel.getDoctorEmail()));
+                if (doctorModel.getDoctorEmail() != null) {
+                    context.startActivity(intent);
+                }
+            }
+        });
+
         if (userPreference.getLoginStatus()) {
             doctorViewHolder.moreOptionBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -89,7 +111,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
 
     class DoctorViewHolder extends RecyclerView.ViewHolder {
         TextView doctorNameTV, doctorEduTV, doctorProTV, doctorCateTV, doctorAddTV;
-        Button doctorCallBtn, doctorEmailBtn;
+        ImageButton doctorCallBtn, doctorEmailBtn;
         TextView moreOptionBtn;
 
         public DoctorViewHolder(@NonNull View itemView) {

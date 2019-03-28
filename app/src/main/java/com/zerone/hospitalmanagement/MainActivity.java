@@ -1,6 +1,8 @@
 package com.zerone.hospitalmanagement;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -115,6 +117,15 @@ public class MainActivity extends AppCompatActivity implements FragmentControlle
         manager.beginTransaction().addToBackStack(null).replace(R.id.fragmentContainer, doctorFormFragment).commit();
     }
 
+    @Override
+    public void dialPhoneNumber(String mobileNumber) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + mobileNumber));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
     private void autoAddDoctor() {
         if (userPreference.getDataFirstTimeEntry()){
             DoctorDataSource doctorDataSource = new DoctorDataSource(this);
@@ -123,10 +134,11 @@ public class MainActivity extends AppCompatActivity implements FragmentControlle
             String[] prof = getResources().getStringArray(R.array.doctor_prof);
             String[] cate = getResources().getStringArray(R.array.doctor_category);
             String[] addr = getResources().getStringArray(R.array.doctor_address);
+            String[] mobile = getResources().getStringArray(R.array.doctor_mobile);
             String[] email = getResources().getStringArray(R.array.doctor_email);
             String[] pass = getResources().getStringArray(R.array.doctor_password);
             for (int i = 0; i < name.length ; i++) {
-                doctorDataSource.insertNewDoctor(new DoctorModel(name[i],edu[i],prof[i],cate[i],addr[i],null,email[i],pass[i]));
+                doctorDataSource.insertNewDoctor(new DoctorModel(name[i],edu[i],prof[i],cate[i],addr[i],mobile[i],email[i],pass[i]));
             }
             userPreference.setDataFirstTimeEntry(false);
         }

@@ -9,4 +9,5 @@ public interface FragmentController {
     void gotoAppointment();
     void gotoPatientList(String name);
     void gotoDoctorEditForm(int id);
+    void dialPhoneNumber(String mobileNumber);
 }

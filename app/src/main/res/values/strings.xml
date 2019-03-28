@@ -51,6 +51,15 @@
         <item>Shyamoli</item>
     </string-array>
 
+    <string-array name="doctor_mobile">
+        <item>01111111111</item>
+        <item>02222222222</item>
+        <item>03333333333</item>
+        <item>04444444444</item>
+        <item>05555555555</item>
+        <item>06666666666</item>
+    </string-array>
+
     <string-array name="doctor_email">
         <item>doctor1@email.com</item>
         <item>doctor2@email.com</item>

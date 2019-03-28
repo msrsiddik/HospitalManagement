@@ -133,17 +133,19 @@
                 android:orientation="horizontal"
                 android:gravity="end">
 
-                <Button
+                <ImageButton
                     android:id="@+id/doctorCallBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Call"/>
+                    android:src="@drawable/phone_ic"
+                    android:layout_marginRight="30dp"/>
 
-                <Button
+                <ImageButton
                     android:id="@+id/doctorEmailBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Email"/>
+                    android:src="@drawable/email_ic"
+                    android:layout_marginRight="10dp"/>
 
             </LinearLayout>
 

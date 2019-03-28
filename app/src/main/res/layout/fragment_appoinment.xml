@@ -32,13 +32,21 @@
             android:inputType="text"/>
     </android.support.design.widget.TextInputLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gender"
+        android:textSize="18sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"/>
+
     <RadioGroup
         android:id="@+id/genderGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="4"
-        android:layout_margin="8dp">
+        android:layout_marginLeft="8dp">
         <RadioButton
             android:id="@+id/maleGender"
             android:layout_weight="1"
