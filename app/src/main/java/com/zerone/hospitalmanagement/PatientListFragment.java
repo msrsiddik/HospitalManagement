@@ -40,6 +40,7 @@ public class PatientListFragment extends Fragment implements AdapterView.OnItemS
 
     private FragmentController fragmentController;
     private Context context;
+    private UserPreference userPreference;
 
     private String[] doctorName;
 
@@ -102,7 +103,7 @@ public class PatientListFragment extends Fragment implements AdapterView.OnItemS
             doctorNameByList.setVisibility(View.INVISIBLE);
             patientDataSource = new PatientDataSource(getContext());
             patientModelList = patientDataSource.getAllPatient(name);
-            patientAdapter = new PatientAdapter(patientModelList);
+            patientAdapter = new PatientAdapter(patientModelList, getContext());
             recyclerView.setAdapter(patientAdapter);
         }
     }
@@ -111,7 +112,7 @@ public class PatientListFragment extends Fragment implements AdapterView.OnItemS
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         patientDataSource = new PatientDataSource(getContext());
         patientModelList = patientDataSource.getAllPatient(doctorName[position]);
-        patientAdapter = new PatientAdapter(patientModelList);
+        patientAdapter = new PatientAdapter(patientModelList, getContext());
         recyclerView.setAdapter(patientAdapter);
     }
 

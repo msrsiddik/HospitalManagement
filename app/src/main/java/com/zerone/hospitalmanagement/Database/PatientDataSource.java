@@ -63,4 +63,11 @@ public class PatientDataSource {
         this.closeDB();
         return patientModelList;
     }
+
+    public int deletePatientById(int patientId){
+        this.openDB();
+        final int deleteRow = db.delete(HospitalDBHelper.TABLE_PATIENT,HospitalDBHelper.TABLE_PATIENT_COL_ID+" = "+patientId,null);
+        this.closeDB();
+        return deleteRow;
+    }
 }
