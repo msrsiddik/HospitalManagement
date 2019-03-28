@@ -65,7 +65,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
                 intent.setData(Uri.parse("mailto:"+doctorModel.getDoctorEmail()));
-                if (doctorModel.getDoctorEmail() != null) {
+                if (intent.resolveActivity(context.getPackageManager()) != null) {
                     context.startActivity(intent);
                 }
             }

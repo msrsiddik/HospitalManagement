@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements FragmentControlle
 
     @Override
     public void gotoHomeFragment(){
+        manager.popBackStack();
         manager.beginTransaction().replace(R.id.fragmentContainer,new HomeFragment()).commit();
     }
 

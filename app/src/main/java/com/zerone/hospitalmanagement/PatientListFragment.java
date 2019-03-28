@@ -66,6 +66,7 @@ public class PatientListFragment extends Fragment implements AdapterView.OnItemS
         super.onViewCreated(view, savedInstanceState);
 
         fragmentController = (FragmentController) getActivity();
+        userPreference = new UserPreference(context);
 
         doctorNameByList = view.findViewById(R.id.doctorNameByList);
         recyclerView = view.findViewById(R.id.patientListView);
@@ -77,6 +78,9 @@ public class PatientListFragment extends Fragment implements AdapterView.OnItemS
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 if (menuItem.getItemId() == R.id.logout){
+                    if (userPreference.getLoginStatus()){
+                        userPreference.setLoginStatus(false);
+                    }
                     fragmentController.gotoHomeFragment();
                 }
                 return true;

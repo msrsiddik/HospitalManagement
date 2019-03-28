@@ -42,6 +42,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
         patientViewHolder.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 patientDataSource.deletePatientById(patientModel.getId());
                 patientModelList.remove(patientModel.getId());
                 notifyDataSetChanged();
