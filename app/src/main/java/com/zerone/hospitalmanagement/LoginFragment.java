@@ -76,10 +76,10 @@ public class LoginFragment extends Fragment {
                         break;
                     }
 
-                    else {
-                        Toast.makeText(getActivity(), "wrong user", Toast.LENGTH_SHORT).show();
-                    }
                 }
+            }
+            else {
+                Toast.makeText(getActivity(), "wrong user", Toast.LENGTH_SHORT).show();
             }
 
         }

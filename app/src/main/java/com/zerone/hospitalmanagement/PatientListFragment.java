@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
@@ -33,6 +34,7 @@ import java.util.List;
 public class PatientListFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private Toolbar toolbar;
     private Spinner doctorNameByList;
+    private ImageView emptyList;
     private RecyclerView recyclerView;
     private List<PatientModel> patientModelList = new ArrayList<>();
     private PatientDataSource patientDataSource;
@@ -70,6 +72,7 @@ public class PatientListFragment extends Fragment implements AdapterView.OnItemS
 
         doctorNameByList = view.findViewById(R.id.doctorNameByList);
         recyclerView = view.findViewById(R.id.patientListView);
+        emptyList = view.findViewById(R.id.emptyList);
         toolbar = view.findViewById(R.id.toolbar);
         toolbar.setTitle("My Patient");
         toolbar.setTitleTextColor(Color.WHITE);
@@ -109,6 +112,10 @@ public class PatientListFragment extends Fragment implements AdapterView.OnItemS
             patientModelList = patientDataSource.getAllPatient(name);
             patientAdapter = new PatientAdapter(patientModelList, getContext());
             recyclerView.setAdapter(patientAdapter);
+
+            if (!patientDataSource.getAllPatient(name).isEmpty()){
+                emptyList.setVisibility(View.INVISIBLE);
+            }
         }
     }
 
@@ -118,6 +125,7 @@ public class PatientListFragment extends Fragment implements AdapterView.OnItemS
         patientModelList = patientDataSource.getAllPatient(doctorName[position]);
         patientAdapter = new PatientAdapter(patientModelList, getContext());
         recyclerView.setAdapter(patientAdapter);
+
     }
 
     @Override
