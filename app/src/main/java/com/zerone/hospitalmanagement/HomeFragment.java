@@ -30,6 +30,7 @@ import com.zerone.hospitalmanagement.Model.DoctorModel;
  */
 public class HomeFragment extends Fragment {
     private AutoCompleteTextView searchDoctor;
+    private ImageButton searchTextClearBtn;
     private Dialog dialog;
     private CardView doctorListBtn, appointmentBtn, adminBtn, doctorBtn;
     private Context context;
@@ -60,6 +61,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         searchDoctor = view.findViewById(R.id.searchDoctor);
+        searchTextClearBtn = view.findViewById(R.id.searchTextClearBtn);
         doctorListBtn = view.findViewById(R.id.doctorListBtn);
         appointmentBtn = view.findViewById(R.id.appointmentBtn);
         adminBtn = view.findViewById(R.id.adminBtn);
@@ -86,6 +88,12 @@ public class HomeFragment extends Fragment {
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, doctorName);
         searchDoctor.setAdapter(adapter);
+        searchTextClearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchDoctor.getText().clear();
+            }
+        });
         dialog.setContentView(R.layout.doctor_view);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         final TextView doctorNameTV, doctorEduTV, doctorProTV, doctorCateTV, doctorAddTV;
@@ -111,7 +119,6 @@ public class HomeFragment extends Fragment {
                 closeDoctorView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        searchDoctor.getText().clear();
                         dialog.dismiss();
                     }
                 });
