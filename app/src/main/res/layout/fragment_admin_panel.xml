@@ -48,9 +48,10 @@
                         android:layout_height="60dp"
                         android:src="@drawable/add_doctor_ic"/>
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Add Doctor"/>
+                        android:text="Add Doctor"
+                        android:gravity="center_horizontal"/>
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -74,9 +75,10 @@
                         android:layout_height="60dp"
                         android:src="@drawable/modify_ic"/>
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Modify Doctor"/>
+                        android:text="Modify Doctor"
+                        android:gravity="center_horizontal"/>
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -100,9 +102,10 @@
                         android:layout_height="60dp"
                         android:src="@drawable/patient_1_ic"/>
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Patient List"/>
+                        android:text="Patient List"
+                        android:gravity="center_horizontal"/>
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>

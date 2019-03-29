@@ -140,4 +140,27 @@ public class DoctorDataSource {
         this.closeDB();
         return deleteRow;
     }
+
+    public DoctorModel getDoctorInfoByName(String doctorName){
+        DoctorModel doctorModel = null;
+        this.openDB();
+        Cursor cursor = db.rawQuery("select * from "+ HospitalDBHelper.TABLE_DOCTOR +" where "+HospitalDBHelper.TABLE_DOCTOR_COL_NAME+" = "+"'"+doctorName+"'",null);
+        if (cursor != null && cursor.getCount() > 0){
+            cursor.moveToFirst();
+            String name = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_NAME));
+            String edu = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_EDU));
+            String pro = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_PRO));
+            String cate = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_CATEGORY));
+            String add = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_ADDRESS));
+            String mobile = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_MOBILE));
+            String email = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_EMAIL));
+            String pass = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_PASS));
+
+            doctorModel = new DoctorModel(name,edu,pro,cate,add,mobile,email,pass);
+        }
+        cursor.close();
+        this.closeDB();
+        return doctorModel;
+    }
+
 }

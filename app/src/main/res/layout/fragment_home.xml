@@ -5,9 +5,30 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
     android:weightSum="3"
     android:padding="10dp"
     tools:context=".HomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center_horizontal">
+        <AutoCompleteTextView
+            android:id="@+id/searchDoctor"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Search Doctor" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/backspace_ic"
+            android:layout_toEndOf="@id/searchDoctor"
+            android:background="#00FFFFFF"
+            android:padding="5dp"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

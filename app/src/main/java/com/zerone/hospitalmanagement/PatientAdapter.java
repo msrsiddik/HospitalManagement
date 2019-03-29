@@ -1,5 +1,6 @@
 package com.zerone.hospitalmanagement;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -18,11 +19,13 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
     private List<PatientModel> patientModelList;
     private PatientDataSource patientDataSource;
     private Context context;
+    private Dialog dialog;
 
     public PatientAdapter(List<PatientModel> patientModelList, Context context) {
         this.patientModelList = patientModelList;
         this.context = context;
         this.patientDataSource = new PatientDataSource(context);
+        dialog = new Dialog(context);
     }
 
     @NonNull
@@ -35,6 +38,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
     @Override
     public void onBindViewHolder(@NonNull PatientViewHolder patientViewHolder, int i) {
         final PatientModel patientModel = patientModelList.get(i);
+        final int id = i;
 
         patientViewHolder.patientNameTV.setText(patientModel.getName());
         patientViewHolder.patientGenderTV.setText(patientModel.getGender());
@@ -42,10 +46,28 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
         patientViewHolder.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.setContentView(R.layout.dialog_confirm);
+                final TextView no = dialog.findViewById(R.id.dialog_no);
+                final TextView yes = dialog.findViewById(R.id.dialog_yes);
 
-                patientDataSource.deletePatientById(patientModel.getId());
-                patientModelList.remove(patientModel.getId());
-                notifyDataSetChanged();
+                no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int deleteById = patientDataSource.deletePatientById(patientModel.getId());
+                        if (deleteById > 0) {
+                            patientModelList.remove(id);
+                            notifyDataSetChanged();
+                            dialog.dismiss();
+                        }
+                    }
+                });
+                dialog.show();
             }
         });
     }

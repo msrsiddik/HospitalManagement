@@ -1,8 +1,8 @@
 package com.zerone.hospitalmanagement;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.PopupMenu;
@@ -12,7 +12,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +27,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
     private DoctorDataSource doctorDataSource;
     private UserPreference userPreference;
     private FragmentController controller;
+    private Dialog dialog;
 
     public DoctorAdapter(List<DoctorModel> doctorModelList, Context context) {
         this.doctorModelList = doctorModelList;
@@ -35,6 +35,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         doctorDataSource = new DoctorDataSource(context);
         userPreference = new UserPreference(context);
         controller = (FragmentController) context;
+        dialog = new Dialog(context);
     }
 
     @NonNull
@@ -48,6 +49,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
     public void onBindViewHolder(@NonNull DoctorViewHolder doctorViewHolder, int i) {
         final DoctorModel doctorModel = doctorModelList.get(i);
         final int id = i;
+
         doctorViewHolder.doctorNameTV.setText(doctorModel.getDoctorName());
         doctorViewHolder.doctorEduTV.setText(doctorModel.getDoctorEducation());
         doctorViewHolder.doctorProTV.setText(doctorModel.getDoctorProfession());
@@ -75,6 +77,9 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
             doctorViewHolder.moreOptionBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    dialog.setContentView(R.layout.dialog_confirm);
+                    final TextView no = dialog.findViewById(R.id.dialog_no);
+                    final TextView yes = dialog.findViewById(R.id.dialog_yes);
                     PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
                     MenuInflater inflater = popupMenu.getMenuInflater();
                     inflater.inflate(R.menu.doctor_option_menu, popupMenu.getMenu());
@@ -86,13 +91,26 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
                                 int doctorId = doctorModel.getId();
                                 controller.gotoDoctorEditForm(doctorId);
                             } else if (menuItem.getItemId() == R.id.delete_item) {
-                                int deleteRowId = doctorDataSource.deleteDoctorById(doctorModel.getId());
-                                if (deleteRowId > 0){
-                                    Toast.makeText(context, "Delete Successful", Toast.LENGTH_SHORT).show();
-                                    doctorModelList.remove(id);
-                                    notifyDataSetChanged();
 
-                                }
+                                no.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                yes.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        int deleteRowId = doctorDataSource.deleteDoctorById(doctorModel.getId());
+                                        if (deleteRowId > 0){
+                                            Toast.makeText(context, "Delete Successful", Toast.LENGTH_SHORT).show();
+                                            doctorModelList.remove(id);
+                                            notifyDataSetChanged();
+                                            dialog.dismiss();
+                                        }
+                                    }
+                                });
+                                dialog.show();
                             }
                             return false;
                         }
