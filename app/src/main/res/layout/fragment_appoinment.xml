@@ -9,104 +9,118 @@
     <include layout="@layout/toolbar"
         android:id="@+id/toolbar"/>
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Appointment Form"
-        android:textSize="30sp"
-        android:gravity="center"
-        android:layout_margin="10dp"
-        android:background="@color/colorPrimary"
-        android:textColor="#fff"
-        android:textStyle="bold"/>
+        android:layout_height="match_parent">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/patient_NameInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp">
-        <android.support.design.widget.TextInputEditText
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Patient Name"
-            android:inputType="text"/>
-    </android.support.design.widget.TextInputLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Appointment Form"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:background="@color/colorPrimary"
+                android:textColor="#fff"
+                android:textStyle="bold"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Gender"
-        android:textSize="18sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="5dp"/>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/patient_NameInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Patient Name"
+                    android:inputType="text"/>
+            </android.support.design.widget.TextInputLayout>
 
-    <RadioGroup
-        android:id="@+id/genderGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        android:layout_marginLeft="8dp">
-        <RadioButton
-            android:id="@+id/maleGender"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="true"
-            android:text="Male "/>
-        <RadioButton
-            android:id="@+id/femaleGender"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Female "/>
-    </RadioGroup>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gender"
+                android:textSize="18sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"/>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/patient_AgeInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp">
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Age"
-            android:inputType="number"/>
-    </android.support.design.widget.TextInputLayout>
+            <RadioGroup
+                android:id="@+id/genderGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                android:layout_marginLeft="8dp">
+                <RadioButton
+                    android:id="@+id/maleGender"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="true"
+                    android:text="Male "/>
+                <RadioButton
+                    android:id="@+id/femaleGender"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female "/>
+            </RadioGroup>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/patient_AddressInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp">
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Address"
-            android:inputType="text"/>
-    </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/patient_AgeInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Age"
+                    android:inputType="number"/>
+            </android.support.design.widget.TextInputLayout>
 
-    <Spinner
-        android:id="@+id/chooseCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp" />
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/patient_AddressInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Address"
+                    android:inputType="text"/>
+            </android.support.design.widget.TextInputLayout>
 
-    <Spinner
-        android:id="@+id/chooseDoctor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp" />
+            <Spinner
+                android:id="@+id/chooseCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp" />
 
-    <Button
-        android:id="@+id/patient_confirmBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Confirm"
-        android:layout_marginLeft="30sp"
-        android:layout_marginRight="30dp"
-        android:background="@color/colorPrimary"
-        android:textColor="#fff"
-        android:textSize="20dp"/>
+            <Spinner
+                android:id="@+id/chooseDoctor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp" />
+
+            <Button
+                android:id="@+id/patient_confirmBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Confirm"
+                android:layout_marginLeft="30sp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="50dp"
+                android:background="@color/colorPrimary"
+                android:textColor="#fff"
+                android:textSize="20dp"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+
 
 </LinearLayout>
