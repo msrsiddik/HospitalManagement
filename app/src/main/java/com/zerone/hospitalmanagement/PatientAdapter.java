@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.zerone.hospitalmanagement.Database.PatientDataSource;
@@ -49,7 +50,14 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
                 dialog.setContentView(R.layout.dialog_confirm);
                 final TextView no = dialog.findViewById(R.id.dialog_no);
                 final TextView yes = dialog.findViewById(R.id.dialog_yes);
+                final ImageButton close = dialog.findViewById(R.id.close);
 
+                close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
                 no.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

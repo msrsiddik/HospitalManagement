@@ -27,7 +27,7 @@
                 android:layout_marginLeft="7dp"
                 android:textColor="@color/colorWhite"/>
             <ImageButton
-                android:id="@+id/closeDoctorView"
+                android:id="@+id/close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/cancel_ic"
