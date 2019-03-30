@@ -94,17 +94,33 @@
                     android:inputType="text"/>
             </android.support.design.widget.TextInputLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Category"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"/>
+
             <Spinner
                 android:id="@+id/chooseCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Doctor"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"/>
 
             <Spinner
                 android:id="@+id/chooseDoctor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp" />
 
             <Button
                 android:id="@+id/patient_confirmBtn"

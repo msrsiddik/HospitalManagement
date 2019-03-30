@@ -22,6 +22,8 @@ import com.zerone.hospitalmanagement.Database.DoctorDataSource;
 import com.zerone.hospitalmanagement.Database.PatientDataSource;
 import com.zerone.hospitalmanagement.Model.PatientModel;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -35,7 +37,7 @@ public class AppoinmentFragment extends Fragment implements AdapterView.OnItemSe
     private Spinner chooseCategory, chooseDoctor;
     private Button patient_confirmBtn;
 
-    private String[] doctorCategory=null;
+    private List<String> doctorCategory=new ArrayList<>();
     private String[] doctorName=null;
     private DoctorDataSource doctorDataSource;
     private String category = null;
@@ -96,25 +98,29 @@ public class AppoinmentFragment extends Fragment implements AdapterView.OnItemSe
     View.OnClickListener confirmBtnListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String name = patient_NameInput.getEditText().getText().toString();
-            String age = patient_AgeInput.getEditText().getText().toString();
-            String address = patient_AddressInput.getEditText().getText().toString();
+            if (category.equals("Category")){
+                Toast.makeText(getContext(), "Select Category and try again", Toast.LENGTH_LONG).show();
+            }else {
+                String name = patient_NameInput.getEditText().getText().toString();
+                String age = patient_AgeInput.getEditText().getText().toString();
+                String address = patient_AddressInput.getEditText().getText().toString();
 
-            PatientModel patientModel = new PatientModel(name,gender,age,address,doctor);
-            patientDataSource = new PatientDataSource(getContext());
-            patientDataSource.insertNewPatient(patientModel);
+                PatientModel patientModel = new PatientModel(name, gender, age, address, doctor);
+                patientDataSource = new PatientDataSource(getContext());
+                patientDataSource.insertNewPatient(patientModel);
 
-            Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
 
-            fragmentController.gotoHomeFragment();
+                fragmentController.gotoHomeFragment();
+            }
         }
     };
 
     void spinnerItemSet(){
         doctorDataSource = new DoctorDataSource(getContext());
-        doctorCategory = new String[doctorDataSource.getCategory().size()];
-        for (int i = 0; i < doctorDataSource.getCategory().size(); i++) {
-            doctorCategory[i] = doctorDataSource.getCategory().get(i);
+        doctorCategory.add(0,"Category");
+        for (int i = 1; i <= doctorDataSource.getCategory().size(); i++) {
+            doctorCategory.add(doctorDataSource.getAlldoctorInfoCollectList().get(i).getDoctorCategory());
         }
 
         ArrayAdapter<String> adapterCategory = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,doctorCategory);
@@ -128,17 +134,22 @@ public class AppoinmentFragment extends Fragment implements AdapterView.OnItemSe
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        category = doctorCategory[position];
+        if (parent.getItemAtPosition(position).toString().equals("Category")){
+            category = parent.getItemAtPosition(position).toString();
+            chooseDoctor.setVisibility(View.INVISIBLE);
+        }else {
+            chooseDoctor.setVisibility(View.VISIBLE);
+            category = parent.getItemAtPosition(position).toString();
 
             doctorName = new String[doctorDataSource.getDoctorNameByCategory(category).size()];
             for (int i = 0; i < doctorName.length; i++) {
                 doctorName[i] = doctorDataSource.getDoctorNameByCategory(category).get(i).getDoctorName();
             }
-            ArrayAdapter<String> adapterDoctor = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,doctorName);
+            ArrayAdapter<String> adapterDoctor = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, doctorName);
             chooseDoctor.setAdapter(adapterDoctor);
 
             doctor = chooseDoctor.getSelectedItem().toString();
-
+        }
     }
 
 
