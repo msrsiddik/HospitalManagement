@@ -163,4 +163,43 @@ public class DoctorDataSource {
         return doctorModel;
     }
 
+    public List<String> getCategory(){
+        List<String> doctorCategory = new ArrayList<>();
+        this.openDB();
+        Cursor cursor = db.rawQuery("select DISTINCT "+HospitalDBHelper.TABLE_DOCTOR_COL_CATEGORY+" from "+ HospitalDBHelper.TABLE_DOCTOR +" ORDER BY "+HospitalDBHelper.TABLE_DOCTOR_COL_CATEGORY,null);
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                doctorCategory.add(cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_CATEGORY)));
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        this.closeDB();
+        return doctorCategory;
+    }
+
+    public List<DoctorModel> getDoctorNameByCategory(String doctorCategory){
+        List<DoctorModel> doctorModel = new ArrayList<>();
+        this.openDB();
+        Cursor cursor = db.rawQuery("select * from "+ HospitalDBHelper.TABLE_DOCTOR +" where "+HospitalDBHelper.TABLE_DOCTOR_COL_CATEGORY+" = "+"'"+doctorCategory+"'",null);
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                String name = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_NAME));
+                String edu = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_EDU));
+                String pro = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_PRO));
+                String cate = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_CATEGORY));
+                String add = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_ADDRESS));
+                String mobile = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_MOBILE));
+                String email = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_EMAIL));
+                String pass = cursor.getString(cursor.getColumnIndex(HospitalDBHelper.TABLE_DOCTOR_COL_PASS));
+
+                doctorModel.add(new DoctorModel(name, edu, pro, cate, add, mobile, email, pass));
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        this.closeDB();
+        return doctorModel;
+    }
+
 }

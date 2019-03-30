@@ -32,12 +32,14 @@ public class AppoinmentFragment extends Fragment implements AdapterView.OnItemSe
     private TextInputLayout patient_NameInput, patient_AgeInput, patient_AddressInput;
     private RadioGroup genderGroup;
     private String gender = "";
-    private Spinner chooseDoctor;
+    private Spinner chooseCategory, chooseDoctor;
     private Button patient_confirmBtn;
 
-    private String[] doctorName;
+    private String[] doctorCategory=null;
+    private String[] doctorName=null;
     private DoctorDataSource doctorDataSource;
-    private String doctor = "";
+    private String category = null;
+    private String doctor = null;
     private PatientDataSource patientDataSource;
 
     private FragmentController fragmentController;
@@ -62,6 +64,7 @@ public class AppoinmentFragment extends Fragment implements AdapterView.OnItemSe
         genderGroup = view.findViewById(R.id.genderGroup);
         patient_AgeInput = view.findViewById(R.id.patient_AgeInput);
         patient_AddressInput = view.findViewById(R.id.patient_AddressInput);
+        chooseCategory = view.findViewById(R.id.chooseCategory);
         chooseDoctor = view.findViewById(R.id.chooseDoctor);
         patient_confirmBtn = view.findViewById(R.id.patient_confirmBtn);
         toolbar = view.findViewById(R.id.toolbar);
@@ -109,21 +112,35 @@ public class AppoinmentFragment extends Fragment implements AdapterView.OnItemSe
 
     void spinnerItemSet(){
         doctorDataSource = new DoctorDataSource(getContext());
-        doctorName = new String[doctorDataSource.getAlldoctorInfoCollectList().size()];
-        for (int i = 0; i < doctorDataSource.getAlldoctorInfoCollectList().size(); i++) {
-            doctorName[i] = doctorDataSource.getAlldoctorInfoCollectList().get(i).getDoctorName();
+        doctorCategory = new String[doctorDataSource.getCategory().size()];
+        for (int i = 0; i < doctorDataSource.getCategory().size(); i++) {
+            doctorCategory[i] = doctorDataSource.getCategory().get(i);
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,doctorName);
-        chooseDoctor.setAdapter(adapter);
+        ArrayAdapter<String> adapterCategory = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,doctorCategory);
 
-        chooseDoctor.setOnItemSelectedListener(this);
+        chooseCategory.setAdapter(adapterCategory);
+
+        chooseCategory.setOnItemSelectedListener(this);
+
+
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        doctor = doctorName[position];
+        category = doctorCategory[position];
+
+            doctorName = new String[doctorDataSource.getDoctorNameByCategory(category).size()];
+            for (int i = 0; i < doctorName.length; i++) {
+                doctorName[i] = doctorDataSource.getDoctorNameByCategory(category).get(i).getDoctorName();
+            }
+            ArrayAdapter<String> adapterDoctor = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,doctorName);
+            chooseDoctor.setAdapter(adapterDoctor);
+
+            doctor = chooseDoctor.getSelectedItem().toString();
+
     }
+
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
